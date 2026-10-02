@@ -1,0 +1,13 @@
+{
+  "name": "plugin.pack",
+  "slug": "pack",
+  "source": "pack",
+  "world": "gams:pack/pack-plugin@1.0.0",
+  "binding": "pack_plugin",
+  "members": [
+    "pack"
+  ],
+  "artifacts": [
+    "plugin.pack.wasm"
+  ]
+}

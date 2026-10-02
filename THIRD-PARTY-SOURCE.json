@@ -1,0 +1,7 @@
+{
+  "plugins/pack.comp/component.c": "f63e767d7e7357e0ca4ca8830f552ee111d90dc50311f22f1983709ca8f6eb44",
+  "plugins/pack.comp/plugin.mk": "465030c7e2c30ae64068dc1eb4f8e0409ef8abf21320bfc54f09a8e05b218a45",
+  "plugins/pack.comp/stb_rect_pack.h": "23c98598b7151febfca1bead8ba1f254690d793c8f060859df73204b33162024",
+  "plugins/pack.comp/test/e2e.mjs": "ceda760e8c5c62274ee23cbac6ad81de75da2a994b37db7eea956dd30aa15e51",
+  "plugins/pack.comp/wit/package.wit": "57297a34c91a3e817873075a98c64ff5147b7fddd820da0ce4950ffdbb7f50a2"
+}

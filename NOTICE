@@ -7,4 +7,4 @@ C build uses wasm32-wasip2-clang (WASI SDK 33), wasi-libc 161b3195fc2558d2b1ba3e
 
 Full terms: LICENSES/. Review: THIRD-PARTY-REVIEW.md. This notice is source-bound, not a certification of unverified upstream provenance or current linked contents.
 
-NOTICE-EVIDENCE.json SHA-256: 3f0b6692307498e8c5fe161b781dde6a32394aeac470e17069ea86299d8af919
+NOTICE-EVIDENCE.json SHA-256: de04a920b4a35836acb2155d075441fe666b0e873fa9990215d8250e159f5500

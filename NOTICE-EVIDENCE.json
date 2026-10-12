@@ -90,11 +90,11 @@
     "LICENSES/wasmtime-Apache-LLVM.txt": "268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
     "LICENSES/wit-bindgen-Apache.txt": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
     "LICENSES/wit-bindgen-MIT.txt": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
-    "LICENSING.md": "9c90a7d909f589c226e600b2cd66f551d7769ba9de2b67fc2ee5e9d751de256e",
+    "LICENSING.md": "5ab40c24f99a7a4ef4e26af2f1aec0e769d3d4b6c19383bf27904fe51d87d60c",
     "Makefile": "bebe6c97ccd2d043a593ba5e1a2b27a0c4ff036f2ece06745806deead7d257bf",
-    "README.md": "50d2fc3c78b558a2b4ee2e5ddbaaafc0585dcb4fa01096621aec2dfbdfee17d0",
-    "SOURCE-INPUTS.json": "8beab51a3a476017aa6e807ef2425298220b4fd7f989e0da65fcd7df6b16c6c2",
-    "THIRD-PARTY-REVIEW.md": "dcf7bf4d689923464e4fca5843567803b75a2e9c916adcaa01cf4f0de6b70a39",
+    "README.md": "120a665dc9af4d59159f82fb37ce17869e4ffeaeac318692063a26897249ee8b",
+    "SOURCE-INPUTS.json": "2734e869bcf30d6215aee58e61199cc2033ccf8d2682365060d73e4ee5c5fdf1",
+    "THIRD-PARTY-REVIEW.md": "2f2ec22846a237416e023320d1ecf96e6275b0a86abcd04b27cbc9ef7963ecf8",
     "THIRD-PARTY-SOURCE.json": "9e88f2d81c56b2d1468e9648d026fe7485b1c399595259754ef6ecb8a8b40ff8",
     "component.json": "5a097a835506bc858612e512c961ccf0e8ced4899c8477832d13e47735a11dde",
     "flake.lock": "3adbe3447e662145dd50a383489f62e7bfbe16996281e113b1fbac347eca3eae",
@@ -119,7 +119,7 @@
     "scripts/wasm-notices.py": "91d94800f753ae948e9289393da9b6b63f6dc24e154a41fbdae2fd59f9305d85",
     "test/runtime.mjs": "d0bcae167cdbf0b4bc9f6a02821a03a8d7469fdaa18a14a10ca2ddcca0ea1c7c",
     "test/test_integrity.py": "35936d0df14d552d49acf5aaa707dbd38024dbc164acf7c939ebedbe0f5219f2",
-    "version.txt": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
+    "version.txt": "71015c979ccb0fc8a0be7ca0ae83046ab045cdc2c8faa09fb2f0f7e440f9b4a6"
   },
   "findings": [
     "stb_rect_pack.h: complete local MIT/Unlicense alternatives retained; MIT attribution is Sean Barrett (2017). Historical import revision not inferred from version banner.",
@@ -183,9 +183,45 @@
       "plugins/pack.comp/wit/package.wit"
     ]
   },
+  "release_preparation": [
+    {
+      "audit_origin": "Historical audit and documentation_cleanup records remain unchanged; prior bytes and digests are recoverable at baseline_commit. This is not a new audit or hosted test result.",
+      "baseline_commit": "bce462546f460b916e9fe66f00447230ee26352b",
+      "changed_inputs": {
+        "LICENSING.md": {
+          "after": "5ab40c24f99a7a4ef4e26af2f1aec0e769d3d4b6c19383bf27904fe51d87d60c",
+          "before": "9c90a7d909f589c226e600b2cd66f551d7769ba9de2b67fc2ee5e9d751de256e"
+        },
+        "README.md": {
+          "after": "120a665dc9af4d59159f82fb37ce17869e4ffeaeac318692063a26897249ee8b",
+          "before": "50d2fc3c78b558a2b4ee2e5ddbaaafc0585dcb4fa01096621aec2dfbdfee17d0"
+        },
+        "SOURCE-INPUTS.json": {
+          "after": "2734e869bcf30d6215aee58e61199cc2033ccf8d2682365060d73e4ee5c5fdf1",
+          "before": "8beab51a3a476017aa6e807ef2425298220b4fd7f989e0da65fcd7df6b16c6c2"
+        },
+        "THIRD-PARTY-REVIEW.md": {
+          "after": "2f2ec22846a237416e023320d1ecf96e6275b0a86abcd04b27cbc9ef7963ecf8",
+          "before": "dcf7bf4d689923464e4fca5843567803b75a2e9c916adcaa01cf4f0de6b70a39"
+        },
+        "version.txt": {
+          "after": "71015c979ccb0fc8a0be7ca0ae83046ab045cdc2c8faa09fb2f0f7e440f9b4a6",
+          "before": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
+        }
+      },
+      "date": "2026-10-12",
+      "owner_instruction": "Checksum/license preparation already complete; drop pending owner reviews, commit changes and prepare local annotated tags. No pushes/publication or approval-variable/workflow changes in this local task.",
+      "previous_evidence_sha256": "3f0b6692307498e8c5fe161b781dde6a32394aeac470e17069ea86299d8af919",
+      "previous_notice_sha256": "30620c1c1d5d311b9c77f9bfa8b209d6cbc33c1e7bc3c857695cc1a45b149fd2",
+      "previous_source_inputs_sha256": "8beab51a3a476017aa6e807ef2425298220b4fd7f989e0da65fcd7df6b16c6c2",
+      "refresh_script_sha256": "183f6fd33b5d48b3824f22e213bf36a72dad84d9d5c0fd18f617eceef1e1d578",
+      "rule": "Only version.txt 0.2.1 and exact README/LICENSING/THIRD-PARTY-REVIEW owner-instruction updates; source/legal manifests and NOTICE evidence suffix refreshed. All license texts, NOTICE body, third-party and other executable sources, WIT versions, private package versions, policies, tests and strict verification unchanged.",
+      "version": "0.2.1"
+    }
+  ],
   "repository": "plugin.pack",
   "schema": 1,
-  "scope": "historical third-party source audit plus bounded documentation cleanup; no new build or audit executed",
+  "scope": "preserved historical third-party source audit and documentation cleanup plus bounded owner-authorized 0.2.1 release preparation; no new legal audit or hosted validation claimed",
   "shipped_host_source_files": [],
   "source_comparison_exclusions": {
     "directories": [

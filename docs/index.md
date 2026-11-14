@@ -1,44 +1,34 @@
 ---
-title: Development
+title: plugin.pack
+description: Rectangle packing.
 status: reference
 ---
 
-# plugin.pack development
+# plugin.pack
 
-Build and verify the component with its pinned toolchain:
+Rectangle packing for [GAMS](https://github.com/kkgams/gams).
 
-```sh
-nix develop --command make build
-nix develop --command make test
-```
+| Unit | Source | Original work |
+| --- | --- | --- |
+| Pack component | `plugins/pack.comp/` | GAMS contributors; stb_rect_pack by Sean Barrett |
 
-## Local Project and documentation
+## Development
 
-```sh
-nix develop --command make open  # build, then open this repository's gams.json
-make serve-docs                 # http://localhost:8080; DOCS_PORT overrides
-make validate-docs
-make docs                       # portable site under build/site/
-```
+Use the pinned toolchain with `nix develop --command make <target>`.
 
-`make open` builds `dist/plugin.pack.wasm` and explicitly sets `GAMS_APP_CWD`
-to this repository. The local Project loads that component and the pinned
-released Files View to inspect Project files; it is not an API demo.
-The shell uses the released layout provider.
-No sibling source checkout is required.
+| Command | Purpose |
+| --- | --- |
+| `make test` | Run native Wasmtime packing/error assertions. |
+| `make build` | Compile the C/WASI component with embedded complete terms. |
+| `make package` | Build `build.nosync/plugin.pack.wasm`, `LICENSES.zip` and `SHA256SUMS`. |
+| `make open` | Build and open the local Project in the released macOS Apple Silicon Host. |
+| `make docs` | Build the pinned wiki in `build.nosync/site/`. |
+| `make serve-docs` | Serve docs; independent `DOCS_PORT` defaults to 8080. |
+| `make validate-docs` | Validate wiki content. |
+| `make clean` | Remove build.nosync and identified managed downloads; refuse tracked paths and symlinks, preserve supplied tools/Units. |
 
-`make tools/gams.app` downloads the released macOS Apple Silicon Host only
-when absent and retains its notices under `tools/gams-release-notices/`.
-Existing downloads are not updated implicitly; macOS security checks remain
-intact. The first download and Project launch require network access.
-Pinned dependencies are declared in `gams.json`; Host caches live in ignored
-`gams_modules/`. Native GUI behavior requires separate verification.
+The local Files View browses the Project; it is not a packing editor. First launch downloads pinned supporting Units. An existing Host is never updated implicitly. `make test` runs existing packing/error assertions on a separately compiled test component using pinned native Wasmtime and Python unittest. These bounded tests do not establish full API or Host integration coverage.
 
-Documentation uses pinned justgook/wiki v1.4.0, with ignored engine/output
-under `build/`. `build-docs` remains a build alias. GitHub Pages runs `make docs`
-on every push to `release`, independently of component release tags.
-Enable **Settings → Pages → Source → GitHub Actions**. Existing component
-build, runtime tests, candidate checks and matching-tag release rules are unchanged.
+## API
 
-See the repository README and licensing/publication documents for API details,
-coverage limits and existing release gates.
+Exports `gams:pack/pack@1.0.0`, world `pack-plugin`. `pack(request)` accepts atlas dimensions, padding, auto-size and rectangles with optional IDs. Results include positions, dimensions, per-rectangle success and packed/failed counts; errors have typed code/message. Complete types are in `plugins/pack.comp/wit/package.wit`.

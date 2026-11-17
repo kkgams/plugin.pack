@@ -13,6 +13,7 @@ Use the pinned toolchain with `nix develop --command make <target>`.
 | Command | Purpose |
 | --- | --- |
 | `make test` | Run native Wasmtime packing/error assertions. |
+| `make compile_commands.json` | Generate clangd inputs and required bindings only; run inside `nix develop`. `.clangd` uses disposable `build.nosync/`. |
 | `make build` | Compile the C/WASI component with embedded complete terms. |
 | `make package` | Build `build.nosync/plugin.pack.wasm`, `LICENSES.zip` and `SHA256SUMS`. |
 | `make open` | Build and open the local Project in the released macOS Apple Silicon Host. |

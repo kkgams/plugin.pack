@@ -1,6 +1,9 @@
 SHELL := bash
 .SHELLFLAGS := -eu -o pipefail -c
 .DEFAULT_GOAL := build
+
+component_compile_flags = -I$(1) -O2 -DNDEBUG
+
 PYTHON ?= python3
 CURL ?= curl
 GAMS_RELEASE_API ?= https://api.github.com/repos/kkgams/gams/releases/latest
@@ -32,7 +35,7 @@ build.nosync/TERMS: $(LEGAL) LICENSES Makefile | build.nosync/tmp
 
 build.nosync/plugin.pack.wasm build.nosync/test/pack.wasm: plugins/pack.comp/component.c plugins/pack.comp/stb_rect_pack.h build.nosync/pack/pack_plugin.c build.nosync/pack/pack_plugin.h build.nosync/pack/pack_plugin_component_type.o build.nosync/TERMS scripts/wasm-notices.py Makefile flake.lock
 	mkdir -p "$(@D)"
-	wasm32-wasip2-clang -o "$@" -mexec-model=reactor -Ibuild.nosync/pack -O2 -DNDEBUG build.nosync/pack/pack_plugin.c plugins/pack.comp/component.c build.nosync/pack/pack_plugin_component_type.o -Wl,--strip-all
+	wasm32-wasip2-clang -o "$@" -mexec-model=reactor $(call component_compile_flags,build.nosync/pack) build.nosync/pack/pack_plugin.c plugins/pack.comp/component.c build.nosync/pack/pack_plugin_component_type.o -Wl,--strip-all
 	wasm-tools strip -a "$@" -o "$@.strip"
 	mv "$@.strip" "$@"
 	$(PYTHON) scripts/wasm-notices.py embed "$@" --license build.nosync/TERMS --notice NOTICE
@@ -79,3 +82,10 @@ docs serve-docs validate-docs: $(WIKI_MAKEFILE)
 
 test: build.nosync/test/pack.wasm
 	$(PYTHON) -m unittest discover -s test -p 'test_*.py'
+
+.PHONY: compile_commands.json
+compile_commands.json: build.nosync/compile_commands.json
+
+build.nosync/compile_commands.json: Makefile flake.nix flake.lock scripts/compile-commands.py plugins/pack.comp/component.c build.nosync/pack/pack_plugin.c build.nosync/pack/pack_plugin.h $(wildcard plugins/pack.comp/*.h) | build.nosync/tmp
+	@$(PYTHON) scripts/compile-commands.py "wasm32-wasip2-clang" $(call component_compile_flags,build.nosync/pack) -- build.nosync/pack/pack_plugin.c plugins/pack.comp/component.c > "$@.tmp"
+	@mv "$@.tmp" "$@"

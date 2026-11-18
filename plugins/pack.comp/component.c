@@ -1,10 +1,10 @@
 #include "pack_plugin.h"
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 
 static void pack_sort(void *base, size_t num, size_t size,
                       int (*cmp)(const void *, const void *));
@@ -40,8 +40,7 @@ typedef struct {
   WorkRect *rects;
 } WorkRequest;
 
-static void set_error(Error *err,
-                      exports_gams_pack_pack_pack_error_code_t code,
+static void set_error(Error *err, exports_gams_pack_pack_pack_error_code_t code,
                       const char *message) {
   err->code = code;
   pack_plugin_string_dup(&err->message, message);
@@ -89,7 +88,8 @@ static bool validate_and_clone_request(Request *request, WorkRequest *work,
   if (work->rect_count == 0) {
     return true;
   }
-  if (work->rect_count > (size_t)UINT32_MAX || work->rect_count > (size_t)INT_MAX) {
+  if (work->rect_count > (size_t)UINT32_MAX ||
+      work->rect_count > (size_t)INT_MAX) {
     set_error(err, EXPORTS_GAMS_PACK_PACK_PACK_ERROR_CODE_OUT_OF_RANGE,
               "too many rectangles");
     return false;
@@ -190,8 +190,8 @@ static bool run_pack(WorkRequest *request, bool *out_packed_all,
 
   stbrp_init_target(&context, (int)request->width, (int)request->height, nodes,
                     (int)request->width);
-  *out_packed_all = stbrp_pack_rects(&context, rects,
-                                     (int)request->rect_count) != 0;
+  *out_packed_all =
+      stbrp_pack_rects(&context, rects, (int)request->rect_count) != 0;
 
   for (size_t i = 0; i < request->rect_count; i++) {
     size_t index = (size_t)rects[i].id;
@@ -258,7 +258,8 @@ static bool run_pack_auto_size(WorkRequest *request, bool *out_packed_all,
       request->width = original_width;
       request->height = original_height;
       set_error(err, EXPORTS_GAMS_PACK_PACK_PACK_ERROR_CODE_OUT_OF_RANGE,
-                "auto-size could not fit all rectangles within supported atlas bounds");
+                "auto-size could not fit all rectangles within supported atlas "
+                "bounds");
       return false;
     }
     candidate <<= 1u;
@@ -266,8 +267,7 @@ static bool run_pack_auto_size(WorkRequest *request, bool *out_packed_all,
 }
 
 static bool build_response(WorkRequest *request, bool packed_all,
-                           uint32_t packed_count, Response *ret,
-                           Error *err) {
+                           uint32_t packed_count, Response *ret, Error *err) {
   memset(ret, 0, sizeof(*ret));
   ret->width = request->width;
   ret->height = request->height;
